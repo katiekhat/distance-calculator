@@ -20,3 +20,4 @@ public class Data {
     private String line;
     private double distance;
 }
+
