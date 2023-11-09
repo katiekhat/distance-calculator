@@ -1,8 +1,10 @@
 package ge.softlab.distancecalculator.controllers;
 
 import ge.softlab.distancecalculator.entities.Data;
+import ge.softlab.distancecalculator.entities.DataHistory;
 import ge.softlab.distancecalculator.services.DataService;
 import ge.softlab.distancecalculator.services.ExcelService;
+import ge.softlab.distancecalculator.services.LocationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ public class DataController {
 
     private final ExcelService excelService;
     private final DataService dataService;
+    private final LocationService locationService;
 
 
     @PostMapping("/upload")
@@ -54,6 +57,23 @@ public class DataController {
 
 
     }
+    @PostMapping("/updateLocation")
+    public ResponseEntity<String> updateLocation(
+            @RequestParam double longitude,
+            @RequestParam double latitude,
+            @RequestParam String vehicleNumber
+    ) {
+        locationService.updateLocation(longitude, latitude, vehicleNumber);
+        return ResponseEntity.ok("Location updated successfully");
+    }
+
+    @GetMapping("/historyData")
+    public ResponseEntity<List<DataHistory>> getAllHistoryData() {
+        List<DataHistory> historyData = locationService.getAllHistoryData();
+        return ResponseEntity.ok(historyData);
+    }
+
+
 
     private double calculateHaversineDistance (double lat1, double lon1, double lat2, double lon2){
             // degrees to radians
