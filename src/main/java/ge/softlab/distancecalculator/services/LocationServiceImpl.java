@@ -7,7 +7,7 @@ import ge.softlab.distancecalculator.repositories.DataHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +26,7 @@ public class LocationServiceImpl implements LocationService {
             // Update existing record in DataCurrent
             currentData.setLongitude(longitude);
             currentData.setLatitude(latitude);
-            currentData.setTimestamp(new Date());
+            currentData.setTimestamp(LocalDateTime.now());
             dataCurrentRepository.save(currentData);
         } else {
             // Add new record to DataCurrent
@@ -34,7 +34,7 @@ public class LocationServiceImpl implements LocationService {
             newData.setVehicleNumber(vehicleNumber);
             newData.setLongitude(longitude);
             newData.setLatitude(latitude);
-            newData.setTimestamp(new Date());
+            newData.setTimestamp(LocalDateTime.now());
             dataCurrentRepository.save(newData);
         }
 
@@ -42,7 +42,7 @@ public class LocationServiceImpl implements LocationService {
         historyData.setVehicleNumber(vehicleNumber);
         historyData.setLongitude(longitude);
         historyData.setLatitude(latitude);
-        historyData.setLastConnected(new Date());
+        historyData.setLastConnected(LocalDateTime.now());
         dataHistoryRepository.save(historyData);
     }
 

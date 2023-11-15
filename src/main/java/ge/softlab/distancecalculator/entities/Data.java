@@ -17,7 +17,8 @@ public class Data {
 
     private Double latitude;
     private Double longitude;
-    private String line;
+    private String vehicleNumber;
     private double distance;
+
 }
 

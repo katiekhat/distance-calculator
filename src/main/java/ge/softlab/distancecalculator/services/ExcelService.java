@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -19,7 +18,6 @@ public class ExcelService {
     private final DataRepository dataRepository;
     public List<Data> readExcelFile(InputStream inputStream) throws IOException {
         List<Data> dataList = new ArrayList<>();
-
         try (Workbook workbook = new XSSFWorkbook(inputStream)) {
             Sheet sheet = workbook.getSheetAt(0);
 
@@ -27,7 +25,7 @@ public class ExcelService {
                 Data data = new Data();
                 data.setLatitude(row.getCell(0).getNumericCellValue());
                 data.setLongitude(row.getCell(1).getNumericCellValue());
-                data.setLine(row.getCell(2).getStringCellValue());
+                data.setVehicleNumber(row.getCell(2).getStringCellValue());
                 dataList.add(data);
             }
         }

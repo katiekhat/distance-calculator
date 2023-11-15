@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-@Table(schema = "public", name = "DataCurrent")
+@Table(schema = "public", name = "data_current")
 public class DataCurrent {
 
     @Id
@@ -21,7 +23,7 @@ public class DataCurrent {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
 
 }
