@@ -3,7 +3,6 @@ package ge.softlab.distancecalculator.services;
 import ge.softlab.distancecalculator.entities.UserDomain;
 import ge.softlab.distancecalculator.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
