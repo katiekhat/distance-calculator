@@ -14,20 +14,28 @@ public class Vehicles {
     @SequenceGenerator(name="vehicles_seq_generation", sequenceName="vehicles_id_seq", allocationSize = 1)
     private Integer vehicleId;
 
+    @Column(name = "vehicle_number")
     private String vehicleNumber;
 
+    @Column(name = "driver")
     private String driver;
 
+    @Column(name = "vehicle_type")
     private String vehicleType;
 
+    @Column(name = "length")
     private Integer length;
 
+    @Column(name = "width")
     private Integer width;
 
+    @Column(name = "height")
     private Integer height;
 
+    @Column(name = "payload")
     private Integer payload;
 
+    @Column(name = "status")
     private Boolean status;
 
 }

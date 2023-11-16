@@ -16,6 +16,9 @@ public class DataHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "vehicle_id")
+//    private Vehicles vehicles;
 
     @Column(name = "latitude")
     private Double latitude;
