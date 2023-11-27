@@ -1,7 +1,7 @@
 package ge.softlab.distancecalculator.services;
 
-import ge.softlab.distancecalculator.entities.Data;
-import ge.softlab.distancecalculator.repositories.DataRepository;
+import ge.softlab.distancecalculator.entities.VehicleLocationHistory;
+import ge.softlab.distancecalculator.repositories.VehicleLocationHistoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,15 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class DataService {
-    private final DataRepository dataRepository;
+    private final VehicleLocationHistoryRepository vehicleLocationHistoryRepository;
 
 
-    public void saveDataToDatabase(List<Data> dataList) {
-        this.dataRepository.saveAll(dataList);
+    public void saveDataToDatabase(List<VehicleLocationHistory> vehicleLocationHistoryList) {
+        this.vehicleLocationHistoryRepository.saveAll(vehicleLocationHistoryList);
     }
 
 
-    public List<Data> getData() {
-        return dataRepository.findAll();
+    public List<VehicleLocationHistory> getData() {
+        return vehicleLocationHistoryRepository.findAll();
     }
 }

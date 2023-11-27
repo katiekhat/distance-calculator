@@ -1,10 +1,8 @@
 package ge.softlab.distancecalculator.controllers;
 
-import ge.softlab.distancecalculator.entities.Data;
-import ge.softlab.distancecalculator.entities.DataHistory;
+import ge.softlab.distancecalculator.entities.VehicleLocationHistory;
 import ge.softlab.distancecalculator.services.DataService;
 import ge.softlab.distancecalculator.services.ExcelService;
-import ge.softlab.distancecalculator.services.LocationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,6 @@ public class DataController {
 
     private final ExcelService excelService;
     private final DataService dataService;
-    private final LocationService locationService;
 
 
     @PostMapping("/upload")
@@ -32,8 +29,8 @@ public class DataController {
         }
 
         try {
-            List<Data> dataList = excelService.readExcelFile(file.getInputStream());
-            dataService.saveDataToDatabase(dataList);
+            List<VehicleLocationHistory> vehicleLocationHistoryList = excelService.readExcelFile(file.getInputStream());
+            dataService.saveDataToDatabase(vehicleLocationHistoryList);
 
             return ResponseEntity.status(HttpStatus.OK).body("File uploaded and data saved to the database.");
         } catch (IOException e) {
@@ -42,36 +39,22 @@ public class DataController {
     }
 
     @GetMapping("/calculate")
-    public ResponseEntity<List<Data>> calculateDistance(@RequestParam("latitude")double latitude, @RequestParam("longitude")double longitude){
-        List<Data> dataList = dataService.getData();
-        for (Data data : dataList) {
+    public ResponseEntity<List<VehicleLocationHistory>> calculateDistance(@RequestParam("latitude")double latitude,
+                                                                          @RequestParam("longitude")double longitude){
+        List<VehicleLocationHistory> vehicleLocationHistoryList = dataService.getData();
+        for (VehicleLocationHistory vehicleLocationHistory : vehicleLocationHistoryList) {
             double distance = calculateHaversineDistance(
-                    latitude, longitude, data.getLatitude(), data.getLongitude()
+                    latitude, longitude, vehicleLocationHistory.getLatitude(), vehicleLocationHistory.getLongitude()
             );
-            data.setDistance(distance);
+            vehicleLocationHistory.setDistance(distance);
         }
-        dataList.sort(Comparator.comparingDouble(Data::getDistance));
-        return new ResponseEntity<>(dataList, HttpStatus.OK);
-
-
+        vehicleLocationHistoryList.sort(Comparator.comparingDouble(VehicleLocationHistory::getDistance));
+        return new ResponseEntity<>(vehicleLocationHistoryList, HttpStatus.OK);
 
 
     }
-    @PostMapping("/updateLocation")
-    public ResponseEntity<String> updateLocation(
-            @RequestParam double longitude,
-            @RequestParam double latitude,
-            @RequestParam String vehicleNumber
-    ) {
-        locationService.updateLocation(longitude, latitude, vehicleNumber);
-        return ResponseEntity.ok("Location updated successfully");
-    }
 
-    @GetMapping("/historyData")
-    public ResponseEntity<List<DataHistory>> getAllHistoryData() {
-        List<DataHistory> historyData = locationService.getAllHistoryData();
-        return ResponseEntity.ok(historyData);
-    }
+
 
 
 

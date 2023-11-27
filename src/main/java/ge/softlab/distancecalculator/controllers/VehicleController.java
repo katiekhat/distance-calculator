@@ -23,26 +23,15 @@ public class VehicleController {
         return ResponseEntity.ok(addedVehicle);
     }
 
-    @GetMapping("/searchVehicle/{vehicleType}")
-    public ResponseEntity<List<Vehicles>> searchVehicle(
-            @PathVariable String vehicleType) {
-
-        List<Vehicles> result = vehicleService.searchVehicle(vehicleType);
-        if (result.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(result);
-        }
-    }
-    @GetMapping("/searchVehicleByNumber")
-    public ResponseEntity<List<Vehicles>> searchVehicleByNumber(
-            @RequestParam String vehicleNumber) {
-
-        List<Vehicles> result = vehicleService.searchVehicleByNumber(vehicleNumber);
-        if (result.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(result);
-        }
-    }
+//    @GetMapping("/searchVehicle/{vehicleType}")
+//    public ResponseEntity<List<Vehicles>> searchVehicle(
+//            @PathVariable String vehicleType) {
+//
+//        List<Vehicles> result = vehicleService.searchVehicle(vehicleType);
+//        if (result.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        } else {
+//            return ResponseEntity.ok(result);
+//        }
+//    }
 }

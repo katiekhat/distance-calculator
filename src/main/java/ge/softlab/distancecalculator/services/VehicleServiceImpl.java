@@ -1,6 +1,9 @@
 package ge.softlab.distancecalculator.services;
 
+import ge.softlab.distancecalculator.entities.VehicleLocationHistory;
 import ge.softlab.distancecalculator.entities.Vehicles;
+import ge.softlab.distancecalculator.repositories.VehicleLocationHistoryRepository;
+import ge.softlab.distancecalculator.repositories.VehicleLocationRepository;
 import ge.softlab.distancecalculator.repositories.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
     private final VehicleRepository vehicleRepository;
+    private final VehicleLocationRepository vehicleLocationRepository;
+    private final VehicleLocationHistoryRepository vehicleLocationHistoryRepository;
     @Override
     public Vehicles createVehicle(Vehicles vehicles) {
         vehicles.setVehicleNumber(vehicles.getVehicleNumber());
@@ -35,12 +40,18 @@ public class VehicleServiceImpl implements VehicleService {
     }
     }
 
-    @Override
-    public List<Vehicles> searchVehicleByNumber(String vehicleNumber) {
-        if (vehicleNumber != null) {
-            return vehicleRepository.findByVehicleNumber(vehicleNumber);
-        } else {
-            return vehicleRepository.findAll();
-        }
-    }
+//    @Override
+//    public List<Vehicles> searchVehicleByNumber(String vehicleNumber) {
+//        if (vehicleNumber != null) {
+//            return vehicleRepository.findByVehicleNumber(vehicleNumber);
+//        } else {
+//            return vehicleRepository.findAll();
+//        }
+//    }
+
+    //vadareb atvirtul excel fileshi tu aris
+
+
+
+
 }

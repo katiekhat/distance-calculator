@@ -8,5 +8,5 @@ public interface VehicleService {
     Vehicles createVehicle(Vehicles vehicles);
     List<Vehicles> searchVehicle(String vehicleType);
 
-    List<Vehicles> searchVehicleByNumber(String vehicleNumber);
+//    List<Vehicles> searchVehicleByNumber(String vehicleNumber);
 }
